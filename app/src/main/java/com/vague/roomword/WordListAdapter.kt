@@ -11,7 +11,7 @@ import com.vague.roomword.model.Word
 class WordListAdapter internal constructor(context: Context) : RecyclerView.Adapter<WordListAdapter.WordViewHolder>() {
 
     private val inflater: LayoutInflater = LayoutInflater.from(context)
-    private val words = emptyList<Word>()
+    private var words = emptyList<Word>()
 
     inner class WordViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val wordItemView: TextView = itemView.findViewById(R.id.textView)
@@ -27,5 +27,10 @@ class WordListAdapter internal constructor(context: Context) : RecyclerView.Adap
     override fun onBindViewHolder(holder: WordViewHolder, position: Int) {
         val current = words[position]
         holder.wordItemView.text = current.word
+    }
+
+    fun setWords(newwords: List<Word>) {
+        words = newwords
+        notifyDataSetChanged()
     }
 }
